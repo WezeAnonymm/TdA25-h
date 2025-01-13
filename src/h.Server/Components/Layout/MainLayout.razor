@@ -1,6 +1,22 @@
 ﻿@inherits LayoutComponentBase
 
-@Body
+<div class="page">
+    <header class="header">
+        <img src="/IMG/Logo/Think-different-Academy_LOGO_oficialni_1 1.svg" alt="Think different Academy logo" id="TdA-logo">
+        <input type="text" placeholder="Vyhledat úlohy" class="search-bar">
+    </header>
+    
+    <div class="display">
+        <div class="navbar">
+            <NavMenu/>
+        </div>
+        
+        <article class="content">
+            @Body
+        </article>
+    </div>
+</div>
+
 
 <div id="blazor-error-ui">
     An unhandled error has occurred.

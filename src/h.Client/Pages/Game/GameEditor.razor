@@ -1,0 +1,56 @@
+@attribute [Route(PageRoutes.Game.GameEditor)]
+@rendermode InteractiveWebAssembly
+
+<PageTitle>Vytvořit novou úlohu</PageTitle>
+
+<div class="vytvorit">
+    <h2>Vytvořit novou úlohu</h2>
+    
+    <EditForm class="panel" FormName="SaveForm" Model="RequestModel">
+        <div class="jmeno sheet">
+            <input placeholder="Jméno úlohy"/>
+            <button class="save-btn" @onclick="HandleSaveGame" type="submit">
+                <img src="/IMG/icons/save.svg" alt="save">
+            </button>
+        </div>
+        <div class="pick sheet">
+            <button class="cross-btn" @onclick="HandleSelectX"></button>
+            <button class="circle-btn" @onclick="HandleSelectO"></button>
+            <button class="eraser" @onclick="HandleSelectEraser"><img src="/IMG/icons/bin.svg" alt="eraser"></button>
+            <div class="line"></div>
+            <button class="bin" @onclick="HandleClearCanvas"><img src="/IMG/icons/bin.svg" alt="bin"></button>
+        </div>
+        <div class="back-forth sheet">
+            <button class="back-btn" @onclick="HandleHistoryBack"><img src="/IMG/icons/back.svg" alt="back"></button>
+            <button class="forth-btn" @onclick="HandleHistoryForth"><img src="/IMG/icons/forth.svg" alt="forth"></button>
+        </div>
+        <div class="difficulty-selector sheet">
+        </div>
+    </EditForm>
+    
+    <div class="game-field" @ref="gameFieldRef">
+        @for (int y = 0; y < 15; y++)
+        {
+            <div class="game-field-row">
+                @for (int x = 0; x < 15; x++)
+                {
+                    int id1D = y * 15 + x;
+                    var xCopy = x;
+                    var yCopy = y;
+
+                    string background = (id1D % 2 == 0) ? "#f9f9f9" : "white";
+                    
+                    <div class="cell"
+                            style="width: 50px; background-color: @background; border: none; display: flex; align-items: center; justify-content: center"
+                            data-x="@xCopy"
+                            data-y="@yCopy">
+                            
+                            @* Symbols added via js *@
+                            @* <img src="" /> *@
+                    </div>
+                }
+            </div>
+            
+        }
+    </div>
+</div>

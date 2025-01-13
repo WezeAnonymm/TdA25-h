@@ -1,9 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap');
+
 :root {
-    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-family: 'Dosis', cursive, sans-serif;
+}
+
+a {
+    text-decoration: none;
 }
 
 h1:focus {
     outline: none;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+}
+
+input[type="text"] {
+    font-family: 'Dosis', cursive, sans-serif;
+    border: #d7d7d7 1px solid;
 }
 
 .valid.modified:not([type=checkbox]) {
@@ -31,3 +47,339 @@ h1:focus {
 .darker-border-checkbox.form-check-input {
     border-color: #929292;
 }
+
+
+#TdA-logo {
+    height: 55px;
+}
+
+/*Vyber hry*/
+.game-list-h2 {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+#new-game {
+    background: #0070BB;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    align-content: center;
+    padding: 10px 60px;
+    margin: 2px 0;
+    cursor: pointer;
+}
+
+.vyber {
+    width: calc(100% - 220px);
+}
+
+.game-cards {
+    display: flex;
+    gap: 15px;
+    overflow-y: scroll;
+    height: 70vh;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    border: none;
+    border-radius: 10px;
+    filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.1));
+    padding: 0 15px 15px;
+    align-self: flex-start;
+}
+
+.card button:hover {
+    transition: transform .2s ease;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.name-diff {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.diff {
+    height: 20px;
+}
+
+.game-img {
+    display: flex;
+    flex-direction: column;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+#play, #edit, #delete {
+    height: 30px;
+    width: 30px;
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#play {
+    background: #0070BB;
+    border-radius: 4px;
+}
+
+.action-row {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 5px;
+}
+
+.secondary-row {
+    display: flex;
+    justify-content: right;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    height: 15px;
+}
+
+.col-dark {
+    background: #F9F9F9;
+    width: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.col-light {
+    background: none;
+    width: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.small-x {
+    height: 10px;
+    width: 10px;
+}
+
+.small-o {
+    height: 10px;
+    width: 10px;
+}
+
+/*filters*/
+.selected span {
+    background: #0070BB;
+    color: white;
+    padding: 4px;
+    border-radius: 4px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.filters {
+    width: 200px;
+    position: absolute;
+    right: 25px;
+}
+
+.category-txt {
+    color: #0070BB;
+}
+
+.filter-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.filter-wrapper #diff, .filter-wrapper #name, .filter-wrapper #date {
+    border-top: solid 2px #D5D5D5;
+    padding: 10px;
+}
+
+.filter-wrapper div:first-child {
+    border: solid 0 white;
+}
+
+.filter-btn {
+    color: #D5D5D5;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+#diff-unwrapped, #name-unwrapped, #date-unwrapped {
+    display: none;
+}
+
+#name-unwrapped input {
+    justify-content: flex-end;
+    display: flex;
+    padding: 10px;
+    border-radius: 0;
+    margin-top: 20px;
+    width: 150px;
+}
+
+#diff span, #date span, #name span{
+    display: inline-block;
+}
+
+.option {
+    color: #D5D5D5;
+    border: none !important;
+}
+
+.option input[type="checkbox"]:checked + span {
+    color: #0070BB;
+}
+
+.option input[type="radio"]:checked + span {
+    color: #0070BB;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.filtrovat {
+    background: #0070BB;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    align-content: center;
+    padding: 10px 5px;
+    margin: 2px 0;
+    cursor: pointer;
+}
+
+.zrusit {
+    background: white;
+    border: 1px #0070BB solid;
+    color: #0070BB;
+    border-radius: 4px;
+    align-content: center;
+    padding: 10px 5px;
+    margin: 2px 0;
+    cursor: pointer;
+}
+
+/*Vytvorit hru*/
+.panel {
+    display: flex;
+    flex-direction: row;
+    gap: 7px;
+}
+
+.jmeno {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.jmeno button {
+    padding: 10px;
+    background: none;
+    border: none;
+}
+
+.jmeno input {
+    padding: 7px 120px 7px 5px;
+}
+
+.cross-btn {
+    background-image: url("/IMG/X/X_cervene.svg");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-size: contain;
+}
+
+.circle-btn {
+    background-image: url("/IMG/O/O_modre.svg");
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-size: contain;
+}
+
+.pick button {
+    border: none;
+    padding: 10px;
+}
+
+.pick {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    border: none;
+    border-radius: 8px;
+    filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.1));
+    padding: 7px;
+    gap: 10px;
+}
+
+.line {
+    width: 2px;
+    background: #f5f5f5;
+    margin: 0 10px;
+    height: 85%;
+}
+
+
+
+/*
+
+!* Grid container *!
+.grid {
+    display: grid;
+    grid-template-columns: repeat(10, 30px); !* 10 columns of 30px each *!
+    grid-template-rows: repeat(10, 30px);    !* 10 rows of 30px each *!
+    gap: 2px;  !* Space between grid cells *!
+    margin-top: 20px;
+}
+
+!* Row for each set of cells *!
+.row {
+    display: flex;
+}
+
+!* Each cell in the grid *!
+.cell {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+!* Color palette container *!
+.palette {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+!* Color buttons in the palette *!
+.color-button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    margin: 5px;
+    cursor: pointer;
+}
+*/
