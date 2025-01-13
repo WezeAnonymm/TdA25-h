@@ -1,0 +1,21 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  h.server:
+    build:
+      context: "E:\\GitHub\\TdA25-h"
+      dockerfile: "src/h.Server/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/h.Server.dll"
+    environment:
+      ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net8.0/h.Server.staticwebassets.runtime.CT.json"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "tda:dev"
+    ports: []
+    volumes:
+    - "E:\\GitHub\\TdA25-h\\src\\h.Server:/app:rw"
+    - "E:\\GitHub\\TdA25-h:/src:rw"
+    - "C:\\Users\\yavor\\.nuget\\packages:/home/app/.nuget/packages"
+    working_dir: "/app"
