@@ -1,36 +1,48 @@
+@using h.Client.Services
+@using h.Primitives.Games
 @attribute [Route(PageRoutes.Game.GameEditor)]
 @rendermode InteractiveWebAssembly
 
 <PageTitle>Vytvořit novou úlohu</PageTitle>
 
 <div class="vytvorit">
-    <h2>Vytvořit novou úlohu</h2>
-    
-    <EditForm class="panel" FormName="SaveForm" Model="RequestModel">
+    @if(loadedGame is not null) {
+        <h2>Upravit úlohu</h2>
+    } else
+    {
+        <h2>Vytvořit novou úlohu</h2>
+    }
+
+    <EditForm class="panel" FormName="SaveForm" Model="RequestModel" OnValidSubmit="HandleSaveGame">
         <div class="jmeno sheet">
-            <input placeholder="Jméno úlohy"/>
-            <button class="save-btn" @onclick="HandleSaveGame" type="submit">
+            <input @bind="RequestModel.Name" placeholder="Jméno úlohy" class="text-input" required/>
+            <button class="save-btn" type="submit">
                 <img src="/IMG/icons/save.svg" alt="save">
             </button>
         </div>
         <div class="pick sheet">
-            <button class="cross-btn" @onclick="HandleSelectX"></button>
-            <button class="circle-btn" @onclick="HandleSelectO"></button>
-            <button class="eraser" @onclick="HandleSelectEraser"><img src="/IMG/icons/bin.svg" alt="eraser"></button>
+            <button type="button" class="cross-btn @(GetBtnActiveClass(1))" @onclick="HandleSelectX"><img src="/IMG/X/X_cervene.svg" alt="X"></button>
+            <button type="button" class="circle-btn @(GetBtnActiveClass(2))" @onclick="HandleSelectO"><img src="/IMG/O/O_modre.svg" alt="O"></button>
+            <button type="button" class="eraser @(GetBtnActiveClass(3))" @onclick="HandleSelectEraser"><img src="/IMG/icons/rubber.svg" alt="eraser"></button>
             <div class="line"></div>
-            <button class="bin" @onclick="HandleClearCanvas"><img src="/IMG/icons/bin.svg" alt="bin"></button>
+            <button type="button" class="bin place-center" @onclick="HandleClearCanvas"><img src="/IMG/icons/bin.svg" alt="bin"></button>
         </div>
         <div class="back-forth sheet">
-            <button class="back-btn" @onclick="HandleHistoryBack"><img src="/IMG/icons/back.svg" alt="back"></button>
-            <button class="forth-btn" @onclick="HandleHistoryForth"><img src="/IMG/icons/forth.svg" alt="forth"></button>
+            <button type="button" class="back-btn" @onclick="HandleHistoryBack"><img src="/IMG/icons/back.svg" alt="back"></button>
+            <button type="button" class="forth-btn" @onclick="HandleHistoryForth"><img src="/IMG/icons/forth.svg" alt="forth"></button>
         </div>
         <div class="difficulty-selector sheet">
+            <div class="left">Nejjednodušší</div>
+            <div class="right">Nejobtížnější</div>
+            <input class="slider" type="range" min="0" max="@(GameDifficulty.List.Count-1)" @bind="RequestModel.Difficulty" @bind:event="oninput"/>
+            <img class="bulb" src="@(ResourceHelper.GetDifficultyBulbImgSrc(GameDifficulty.FromValue(RequestModel.Difficulty)))"/>
         </div>
     </EditForm>
     
     <div class="game-field" @ref="gameFieldRef">
         @for (int y = 0; y < 15; y++)
         {
+            @* "data-cell-hover-symbol" set via js *@
             <div class="game-field-row">
                 @for (int x = 0; x < 15; x++)
                 {
@@ -40,11 +52,10 @@
 
                     string background = (id1D % 2 == 0) ? "#f9f9f9" : "white";
                     
-                    <div class="cell"
+                    <div class="cell empty"
                             style="width: 50px; background-color: @background; border: none; display: flex; align-items: center; justify-content: center"
                             data-x="@xCopy"
                             data-y="@yCopy">
-                            
                             @* Symbols added via js *@
                             @* <img src="" /> *@
                     </div>

@@ -1,5 +1,5 @@
-﻿const X_IMG_PATH = '/img/X/X_cervene.svg';
-const O_IMG_PATH = '/img/O/O_modre.svg';
+﻿const X_IMG_PATH = '/IMG/X/X_cervene.svg';
+const O_IMG_PATH = '/IMG/O/O_modre.svg';
 
 // 'X' or 'O' or '' for eraser
 const PENCIL_X = 'X';
@@ -7,27 +7,43 @@ const PENCIL_O = 'O';
 const PENCIL_ERASER = '';
 
 let selectedPencil = null;
-const gameField = []; // [y][x], y - row, x - column
+let gameField = []; // [y][x], y - row, x - column
 let gameFieldElementRef;
 
-const editHistory = [];
+let editHistory = [];
 let historyI = 0;
+
+// Needed, because js variables persists after leaving page
+const reset = () => {
+    gameField = [];
+    gameFieldElementRef = null;
+    editHistory = [];
+    historyI = 0;
+    selectedPencil = null;
+}
 
 export const initializeEditor = (
     _gameFieldElementRef = new Element(),
     fieldWidth = 15,
-    fieldHeight = 15
+    fieldHeight = 15,
+    loadedField = null // Optional, used when editing existing game
 ) => {
+    reset();
+
     gameFieldElementRef = _gameFieldElementRef;
 
     // Prepare field
     for (let y = 0; y < fieldHeight; y++) {
         gameField.push([]);
         for (let x = 0; x < fieldWidth; x++) {
-            gameField[y].push('');
+            gameField[y].push(PENCIL_ERASER);
         }
     }
 
+    if (loadedField != null) {
+        loadField(loadedField);
+    }
+    
     appendCurrentStateToEditHistory();
 
     // Add onclick event to each cell
@@ -60,8 +76,9 @@ const handleCellClick = (
             if (shouldAppendToHistory) {
                 appendCurrentStateToEditHistory();
             }
-            return;
         }
+
+        return;
     }
 
     // -> Draw
@@ -87,15 +104,30 @@ const handleCellClick = (
 }
 
 export const selectXPencil = () => {
+    if (gameFieldElementRef == null)
+        return;
+
     selectedPencil = PENCIL_X;
+
+    gameFieldElementRef.setAttribute('data-cell-hover-symbol', PENCIL_X);
 }
  
 export const selectOPencil = () => {
+    if (gameFieldElementRef == null)
+        return;
+
     selectedPencil = PENCIL_O;
+
+    gameFieldElementRef.setAttribute('data-cell-hover-symbol', PENCIL_O);
 }
 
 export const selectEraser = () => {
+    if (gameFieldElementRef == null)
+        return;
+
     selectedPencil = PENCIL_ERASER;
+
+    gameFieldElementRef.setAttribute('data-cell-hover-symbol', PENCIL_ERASER);
 }
 
 export const clearCanvas = () => {
